@@ -1,0 +1,1 @@
+./bbmed arvore xmed.csv
