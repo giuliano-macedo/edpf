@@ -39,6 +39,7 @@ BaseNode* basenode_copy(BaseNode* n);
 void bloodTypeToString(BloodType bt,char* str);
 void galon_print(float*gal);
 int bloodtype_iscompatible(BloodType x,BloodType y);
+uint countValidLines(FILE* f);
 void err(char* msg);
 #include "tree.h"
 #include "ntree.h"

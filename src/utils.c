@@ -60,7 +60,7 @@ BaseNode* basenodestack_pop (BaseNodeStack** s){
 }
 void galon_print(float*gal){
     printf("----------------------------\n");
-    printf("Quantidade de sangue doada para cada tipo:\n");
+    printf("Quantidade de sangue doada para cada tipo em mL:\n");
     printf("A+ :%.2f\n",gal[1]);
     printf("B+ :%.2f\n",gal[2]);
     printf("AB+:%.2f\n",gal[3]);
@@ -130,7 +130,6 @@ void bd_init(DataBase*d,DataBaseType dt){
                     err("navl não implementada ainda :(\n");
                     d->na=navl_new();
                     ,
-                    err("tabelahash não implementada ainda :(\n");
                     d->h=hashtable_new();
                 )
 }

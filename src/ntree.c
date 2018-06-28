@@ -42,20 +42,20 @@ void ntree_insert(NtreeNode* nt,BaseNode* n){
 }
 
 NtreeNode** ntree_searchByName(NtreeNode*nt,char* str){
-
+	return 0;
 }
 void ntree_removeNode(NtreeNode*nt){
 
 }
 
 int ntree_printAge(NtreeNode*t,uint age){
-
+	return 0;
 }
 int ntree_printCompatibleDonors(NtreeNode* t,BloodType bt){
-
+	return 0;
 }
 int ntree_printBloodType(NtreeNode*t,BloodType bt){
-
+	return 0;
 }
 
 void ntree_getGalon(NtreeNode* t,float* g){

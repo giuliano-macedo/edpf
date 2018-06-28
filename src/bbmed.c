@@ -55,6 +55,7 @@ int main(int argc,char** argv){
 	TreeNode** t;
 	// NtreeNode** nt;
 	AvlNode* a;
+	BaseNode* bn;
 	// NavlNode** na;
 	BaseNode temp;
 	BloodType bt;
@@ -99,7 +100,13 @@ int main(int argc,char** argv){
 					,
 					//navl..
 					,
-					//hashtable..
+					bn=hashtable_searchByName(bd.h,str);
+					if(bn){
+						strcpy(temp.name,bn->name);
+						temp.age=bn->age;
+	            		temp.bt=bn->bt;
+	            		temp.dntbld=bn->dntbld;
+					}
             	)
             	if(!temp.bt)printf("Usuário não encontrado\n");
             	else{
@@ -131,7 +138,7 @@ int main(int argc,char** argv){
 					,
 					//navl..
 					,
-					//hashtable..
+					hashtable_insert(bd.h,&temp);
             	)
 				break;
 			case 'r':
@@ -183,7 +190,17 @@ int main(int argc,char** argv){
 					,
 					//navl..
 					,
-					//hashtable..
+					bn=hashtable_remove(bd.h,str);
+					if(!bn){
+						printf("usuário não encontrado\n");
+						break;
+					}
+					printf("Usuário a seguir foi removido\n");
+					basenode_print(bn);
+					if(hashtable_searchByName(bd.h,str)){
+						printf("Cadastro duplicado encontrado\n");
+						printf("O resto dos cadastros duplicados foram preservados\n");
+					}
             	)
 				break;
 			case 'a':
@@ -220,9 +237,10 @@ int main(int argc,char** argv){
 					if(!a){
 						break;
 					}
-					temp.age=(*t)->age;
-            		temp.bt=(*t)->bt;
-            		temp.dntbld=(*t)->dntbld;
+					strcpy(temp.name,a->name);
+					temp.age=a->age;
+            		temp.bt=a->bt;
+            		temp.dntbld=a->dntbld;
 					if(a->s){
 						printf("Cadastro duplicado encontrado!\n");
             			printf("O resto dos cadastros duplicados foram preservados\n");
@@ -235,7 +253,18 @@ int main(int argc,char** argv){
 					,
 					//navl..
 					,
-					//hashtable..
+					bn=hashtable_remove(bd.h,str);
+					if(!bn){
+						break;
+					}
+					strcpy(temp.name,bn->name);
+					temp.age=bn->age;
+            		temp.bt=bn->bt;
+            		temp.dntbld=bn->dntbld;
+					if(hashtable_searchByName(bd.h,str)){
+						printf("Cadastro duplicado encontrado\n");
+						printf("O resto dos cadastros duplicados foram preservados\n");
+					}
             	)
             	if(!temp.bt){
             		printf("Nome não encontrado\n");
@@ -299,7 +328,7 @@ int main(int argc,char** argv){
 					,
 					//navl..
 					,
-					//hashtable..
+					hashtable_insert(bd.h,&temp);
             	)
 				break;
 			case 'l':
@@ -334,7 +363,9 @@ int main(int argc,char** argv){
 							,
 							//navl..
 							,
-							//hashtable..
+							if(!hashtable_printBloodType(bd.h,bt)){
+								printf("Nenhum usuário encontrado\n");
+							}
 		            	)
 		            	break;
 					case 'l':
@@ -348,7 +379,7 @@ int main(int argc,char** argv){
 							,
 							//navl..
 							,
-							//hashtable..
+							hashtable_print(bd.h);
 		            	)
 						break;
 					case 'i':
@@ -368,7 +399,9 @@ int main(int argc,char** argv){
 							,
 							//navl..
 							,
-							//hashtable..
+							if(!hashtable_printAge(bd.h,temp.age)){
+			            		printf("Nenhum usuário encontrado\n");
+			            	}
 		            	)
 						break;
 					case 'c':
@@ -393,7 +426,9 @@ int main(int argc,char** argv){
 							,
 							//navl..
 							,
-							//hashtable..
+							if(!hashtable_printCompatibleDonors(bd.h,bt)){
+			            		printf("Nenhum usuário encontrado\n");
+			            	}
 		            	)
 						break;
 					case 'q':
@@ -403,17 +438,16 @@ int main(int argc,char** argv){
 						}
 						BDSWITCH(bdtype,
 					            	tree_getGalon(bd.t,galon);
-					            	galon_print(galon);
 					            	,
 					            	//ntree..
 					            	,
 									avl_getGalon(bd.a,galon);
-					            	galon_print(galon);
 									,
 									//navl..
 									,
-									//hashtable..
+									hashtable_getGalon(bd.h,galon);
 				            	)
+					    galon_print(galon);
 						break;
 				}
 				break;

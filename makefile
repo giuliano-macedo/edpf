@@ -1,5 +1,6 @@
 all:bbmed benchmark
-LIBFLAGS := -std=gnu11
+LIBFLAGS := -fshort-enums -std=gnu11 -Wall -Wno-switch
+#-fshort-enums para forçar tamanho de enums para ser o mínimo possível
 IFLAGS := -Iinclude/
 BASESRC := src/tree.c src/ntree.c src/avl.c src/navl.c src/hashtable.c src/utils.c
 BBMEDSRC := $(BASESRC) src/bbmed.c
@@ -11,7 +12,7 @@ BENCHHDR := $(BASEHDR) include/benchmark.h
 bbmed: $(BBMEDSRC) $(BBMEDHDR)
 	gcc $(BBMEDSRC) $(IFLAGS) $(LIBFLAGS) -o bbmed
 benchmark:$(BENCHSRC) $(BENCHHDR)
-	gcc $(LIBFLAGS) $(IFLAGS) $(BENCHSRC) -o benchmark
+	gcc -D BENCH $(LIBFLAGS) $(IFLAGS) $(BENCHSRC) -o benchmark
 .PHONY clean:
 clean:
 	rm -f benchmark bbmed
